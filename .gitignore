@@ -1,0 +1,15 @@
+# JetBrains
+.idea/
+
+# VS Code
+.vscode/
+
+# OSX
+.DS_Store
+
+# __pycache__
+__pycache__/
+*/__pycache__/
+
+# egg-info
+*egg-info*/
