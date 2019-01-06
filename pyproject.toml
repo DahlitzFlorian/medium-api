@@ -1,0 +1,48 @@
+[build-system]
+requires = [
+    "colorlog",
+    "flit",
+    "selenium",]
+build-backend = "flit.buildapi"
+
+[tool.flit.metadata]
+module = "medium"
+author = "Florian Dahlitz"
+author-email = "f2dahlitz@freenet.de"
+home-page = "https://github.com/DahlitzFlorian/medium-api"
+classifiers = ["License :: OSI Approved :: Apache Software License"]
+requires = [
+    "colorlog",
+    "selenium",]
+requires-python = ">=3.5"
+description-file = "README.md"
+
+[tool.tox]
+legacy_tox_ini = """
+[tox]
+isolated_build = true
+envlist = py35, py36, py37
+[testenv]
+setenv =
+    PYTHONPATH = {toxinidir}
+deps =
+    pytest
+    pydocstyle
+commands =
+    pytest
+    pydocstyle --ignore=D301,D212,D203 medium
+"""
+
+[tool.black]
+line-length = 90
+py36 = true
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.git
+  | \.tox
+  | \.venv
+  | build
+  | dist
+)/
+'''
