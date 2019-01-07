@@ -9,6 +9,7 @@ import platform
 from pathlib import Path
 from selenium import webdriver
 from selenium.common.exceptions import WebDriverException
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 
 __version__ = "0.0.1"
@@ -31,7 +32,9 @@ def _get_browser():
     try:
         filename = "geckodriver-" + os_info
         executable_path = Path(__file__).resolve().parent / "drivers" / filename
-        test_browser = webdriver.Firefox(executable_path=str(executable_path))
+        capabilities = DesiredCapabilities().FIREFOX
+        capabilities["marionette"] = False
+        test_browser = webdriver.Firefox(capabilities=capabilities, executable_path=str(executable_path))
         test_browser.get("https://google.com")
 
         return test_browser
@@ -39,7 +42,9 @@ def _get_browser():
         try:
             filename = "chromedriver-" + os_info
             executable_path = Path(__file__).resolve().parent / "drivers" / filename
-            test_browser = webdriver.Chrome(executable_path=str(executable_path))
+            capabilities = DesiredCapabilities().CHROME
+            capabilities["marionette"] = False
+            test_browser = webdriver.Chrome(capabilities=capabilities, executable_path=str(executable_path))
             test_browser.get("https://google.com")
 
             return test_browser
