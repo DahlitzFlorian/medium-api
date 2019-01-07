@@ -13,9 +13,9 @@ from selenium import webdriver
 __version__ = "0.0.1"
 
 
-def _get_executable_path():
+def _get_browser():
     os_mapping = {
-        "Windows": "windows",
+        "Windows": "windows.exe",
         "Darwin": "macosx",
         "Linux": "linux"
     }
@@ -26,14 +26,24 @@ def _get_executable_path():
         raise EnvironmentError("Unsupported system type: {}".format(os_type))
 
     os_info = os_mapping[os_type]
-    filename = "phantomjs-" + os_info
 
-    if os_type == 'Windows':
-        filename += ".exe"
+    try:
+        filename = "geckodriver-" + os_info
+        executable_path = Path(__file__).resolve().parent / "drivers" / filename
+        test_browser = webdriver.Firefox(executable_path=executable_path)
+        test_browser.get("https://google.com")
 
-    path = Path(__file__).resolve().parent / "phantomjs" / filename
+        return test_browser
+    except IOException:
+        try:
+            filename = "chromedriver-" + os_info
+            executable_path = Path(__file__).resolve().parent / "drivers" / filename
+            test_browser = webdriver.Chrome(executable_path=executable_path)
+            test_browser.get("https://google.com")
 
-    return str(path)
+            return test_browser
+        except IOException:
+            raise EnvironmentError("No supported browser installed. Install Firefox or Chrome.")
 
 
-browser = webdriver.PhantomJS(executable_path=_get_executable_path())
+browser = _get_browser()
