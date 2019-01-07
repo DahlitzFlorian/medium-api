@@ -8,6 +8,7 @@ import platform
 
 from pathlib import Path
 from selenium import webdriver
+from selenium.common.exceptions import WebDriverException
 
 
 __version__ = "0.0.1"
@@ -30,19 +31,19 @@ def _get_browser():
     try:
         filename = "geckodriver-" + os_info
         executable_path = Path(__file__).resolve().parent / "drivers" / filename
-        test_browser = webdriver.Firefox(executable_path=executable_path)
+        test_browser = webdriver.Firefox(executable_path=str(executable_path))
         test_browser.get("https://google.com")
 
         return test_browser
-    except IOException:
+    except WebDriverException:
         try:
             filename = "chromedriver-" + os_info
             executable_path = Path(__file__).resolve().parent / "drivers" / filename
-            test_browser = webdriver.Chrome(executable_path=executable_path)
+            test_browser = webdriver.Chrome(executable_path=str(executable_path))
             test_browser.get("https://google.com")
 
             return test_browser
-        except IOException:
+        except WebDriverException:
             raise EnvironmentError("No supported browser installed. Install Firefox or Chrome.")
 
 
