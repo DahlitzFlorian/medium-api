@@ -23,7 +23,7 @@ def _get_executable_path():
     os_type = platform.system()
 
     if os_type not in os_mapping:
-        raise EnvironmentError(f"Unsupported system type: {os_type}")
+        raise EnvironmentError("Unsupported system type: {}".format(os_type))
 
     os_info = os_mapping[os_type]
     filename = "phantomjs-" + os_info
