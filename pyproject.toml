@@ -1,7 +1,7 @@
 [build-system]
 requires = [
-    "colorlog",
     "flit",
+    "loguru",
     "selenium",]
 build-backend = "flit.buildapi"
 
@@ -12,7 +12,7 @@ author-email = "f2dahlitz@freenet.de"
 home-page = "https://github.com/DahlitzFlorian/medium-api"
 classifiers = ["License :: OSI Approved :: Apache Software License"]
 requires = [
-    "colorlog",
+    "loguru",
     "selenium",]
 requires-python = ">=3.5"
 description-file = "README.md"
