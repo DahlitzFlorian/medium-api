@@ -5,23 +5,19 @@ from loguru import logger
 from medium import browser
 
 
-website_link = "https://github.com/login"
-username = ""
+website_link = "https://medium.com/m/signin?redirect=https%3A%2F%2Fmedium.com%2F&operation=login"
+email = ""
 password = ""
-
-element_for_username = "login"
-element_for_password = "password"
-element_for_submit = "commit"
 
 browser.get(website_link)
 
 try:
-    username_field = browser.find_element_by_name(element_for_username)
-    username_field.send_keys(username)
-    password_field = browser.find_element_by_name(element_for_password)
-    password_field.send_keys(password)
-    signInButton = browser.find_element_by_name(element_for_submit)
-    signInButton.click()
+    email_button = browser.find_element_by_css_selector("button.js-emailButton")
+    email_button.click()
+    email_field = browser.find_element_by_name("email")
+    email_field.send_keys(email)
+    login_button = browser.find_element_by_css_selector("button[data-action-value='login']")
+    login_button.click
 
     logger.debug(browser.page_source)
 except Exception as e:
