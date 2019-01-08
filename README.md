@@ -7,5 +7,10 @@ gaps, a browser imitation has to be used such as Selenium.
 
 version 0.1dev
 
+## Blocking Issues ##
+As Medium uses reCaptcha, the login automation is currently the major
+issue. If anybody know a reliable solution to bypass this, feel
+free to submit a PR.
+
 ## Contribution ##
 Contributions are highly welcomed.
