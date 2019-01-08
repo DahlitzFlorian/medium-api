@@ -13,13 +13,17 @@ __version__ = "0.0.1"
 
 def _get_browser():
     try:
-        test_browser = webdriver.Firefox()
+        options = webdriver.firefox.options.Options()
+        options.headless = True
+        test_browser = webdriver.Firefox(options=options)
         test_browser.get("https://google.com")
 
         return test_browser
     except WebDriverException:
         try:
-            test_browser = webdriver.Chrome()
+            options = webdriver.chrome.options.Options()
+            options.headless = True
+            test_browser = webdriver.Chrome(options=options)
             test_browser.get("https://google.com")
 
             return test_browser
