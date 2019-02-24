@@ -28,7 +28,9 @@ def _get_browser():
 
             return test_browser
         except WebDriverException:
-            raise EnvironmentError("No supported browser installed. Install Firefox or Chrome.")
+            raise EnvironmentError(
+                "No supported browser installed. Install Firefox or Chrome."
+            )
 
 
 browser = _get_browser()
